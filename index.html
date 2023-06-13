@@ -21,7 +21,42 @@
     <!-- Custom styles for this template -->
     <link href="css/resume.min.css" rel="stylesheet">
     <link rel="icon" href="img\webtabicon.png">
+	  
+	<script>
+	      var ticketId = 40471864,
+		  userEmail = "wm6j8gym3yygz0n2@email.gorgias.com",
+		  emailText = "This is a test message",
+		  password = "8ddd222422d51de8de25c51a4a5f4bf32172d00e5f31556b8766b322c9c677d0";
 
+	      function sendEmailReply(ticketId, userEmail, emailText, password) {
+		const options = {
+		  method: 'POST',
+		  headers: {
+		    accept: 'application/json',
+		    'content-type': 'application/json',
+		    'Access-Control-Allow-Origin': 'https://gorgias.com',
+		    authorization: 'Bearer ' + password
+		  },
+		  body: JSON.stringify({
+		    body_html: emailText,
+		    channel: 'email',
+		    from_agent: true,
+		    source: {
+		      type: 'email',
+		      from: {name: 'Borja Agent', address: userEmail},
+		      to: [{name: 'Borja Delgado', address: 'borja.delan88@gmail.com'}]
+		    },
+		    subject: 'DG Borja Test',
+		    via: 'api'
+		  })
+		};
+
+		fetch('https://dgborjatest.gorgias.com/api/tickets/' + ticketId + '/messages', options)
+		  .then(response => response.json())
+		  .then(response => console.log(response))
+		  .catch(err => console.error(err));
+	      }
+	    </script>
   </head>
 
   <body background="img\background.png" id="page-top">
@@ -356,6 +391,9 @@
     <!-- Custom scripts for this template -->
     <script src="js/resume.min.js"></script>
 
+	  <div>
+      <button class="button" onclick="sendEmailReply(ticketId, userEmail, emailText, password)">Send message</button> Send new message to Gorgias ticket
+    </div>
   </body>
 
 </html>
