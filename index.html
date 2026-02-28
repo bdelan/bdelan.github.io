@@ -1,361 +1,786 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borja Delgado</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <head>
+  :root {
+    --ink:     #0b0e1a;
+    --ink2:    #141929;
+    --blue:    #3b82f6;
+    --blue-lt: rgba(59,130,246,0.12);
+    --blue-glow: rgba(59,130,246,0.25);
+    --silver:  #c8d0e0;
+    --muted:   #5a6380;
+    --white:   #f4f6fb;
+    --rule:    rgba(255,255,255,0.07);
+    --accent:  #3b82f6;
+  }
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  html { font-size: 14px; }
 
-    <title>Borja Delgado</title>
+  body {
+    background: var(--ink);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  .mesh {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .mesh-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.18;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  .mesh-blob:nth-child(1) {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, #3b82f6, transparent 70%);
+    top: -150px; left: -100px;
+    animation-duration: 20s;
+  }
+  .mesh-blob:nth-child(2) {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, #1e40af, transparent 70%);
+    bottom: 100px; right: -80px;
+    animation-duration: 15s;
+    animation-delay: -7s;
+  }
+  .mesh-blob:nth-child(3) {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, #60a5fa, transparent 70%);
+    top: 50%; left: 55%;
+    animation-duration: 22s;
+    animation-delay: -4s;
+  }
+  @keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(40px, 30px) scale(1.08); }
+  }
 
-    <!-- Custom fonts for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px;
+  }
 
-    <!-- Custom styles for this template -->
-    <link href="css/resume.min.css" rel="stylesheet">
-    <link rel="icon" href="img\webtabicon.png">
-	  
-  </head>
+  .page {
+    position: relative;
+    z-index: 2;
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
 
-  <body background="img\background.png" id="page-top">
+  .hero {
+    padding: 64px 0 52px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    animation: fadeUp 0.7s ease both;
+  }
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">Borja Delgado</span>
-        <span class="d-none d-lg-block">
-          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt="">
-        </span>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#education">Education</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#skills">Skills</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#interests">Interests</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#certifications">Certifications</a>
-          </li>
-        </ul>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-index {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.28em;
+    color: var(--blue);
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-index::before { display: none; }
+  .hero-index .sub {
+    color: rgba(180,200,255,0.75);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 11vw, 9rem);
+    line-height: 0.88;
+    letter-spacing: 0.01em;
+    color: var(--white);
+    margin-bottom: 24px;
+  }
+  .hero-name em {
+    color: var(--blue);
+    font-style: normal;
+  }
+
+  .hero-tagline {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--silver);
+    line-height: 1.6;
+    max-width: 520px;
+    border-left: 2px solid var(--blue);
+    padding-left: 18px;
+  }
+  .hero-tagline strong {
+    font-style: normal;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  .hero-contact {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    align-items: center;
+    padding-bottom: 4px;
+  }
+  .hc-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+  .hc-icon:hover {
+    color: var(--white);
+    border-color: var(--blue);
+    background: var(--blue-lt);
+  }
+
+  .body {
+    display: grid;
+    grid-template-columns: 58px 1fr 260px;
+    gap: 0;
+    padding-top: 52px;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+
+  .spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6px;
+    gap: 0;
+    border-right: 1px solid var(--rule);
+    margin-right: 40px;
+  }
+  .spine-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    padding-bottom: 16px;
+  }
+  .spine-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    flex-shrink: 0;
+    box-shadow: 0 0 10px var(--blue-glow);
+  }
+
+  .section {
+    margin-bottom: 52px;
+  }
+
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .sec-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: #6b9fff;
+    letter-spacing: 0.02em;
+    user-select: none;
+  }
+  .sec-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.18em;
+    color: var(--silver);
+    text-transform: uppercase;
+  }
+  .sec-rule {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .exp {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0 28px;
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .exp:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .exp-time {
+    padding-top: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .exp-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    line-height: 1;
+    color: var(--blue);
+    letter-spacing: 0.03em;
+    display: block;
+  }
+  .exp-period {
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    display: block;
+    line-height: 1.5;
+    margin-top: 3px;
+  }
+
+  .exp-role {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 3px;
+    line-height: 1.3;
+  }
+  .exp-co {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 14px;
+  }
+  .exp-co + .exp-location {
+    margin-top: -12px;
+  }
+  .exp-location {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0;
+    margin-bottom: 10px;
+    letter-spacing: 0.03em;
+  }
+  .exp-co span {
+    color: var(--muted);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    margin-left: 4px;
+  }
+  }
+
+  .exp-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-left: 0;
+  }
+  .exp-list li {
+    font-size: 0.84rem;
+    color: #8a93b0;
+    line-height: 1.65;
+    padding-left: 14px;
+    position: relative;
+    list-style: none;
+  }
+  .exp-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--blue);
+    opacity: 0.6;
+  }
+  .exp-list li::marker {
+    content: none;
+  }
+  .exp-list li strong {
+    color: #8a93b0;
+    font-weight: 300;
+  }
+
+  .exp-accounts {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .acc {
+    font-size: 0.67rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--blue);
+    background: var(--blue-lt);
+    border: 1px solid rgba(59,130,246,0.2);
+    padding: 3px 10px;
+    border-radius: 3px;
+  }
+
+  .sidebar {
+    border-left: 1px solid var(--rule);
+    padding-left: 36px;
+  }
+
+  .sb-section { margin-bottom: 38px; }
+
+  .sb-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sb-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .comp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .comp {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--silver);
+    padding: 9px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .comp::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--blue);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .comp:hover {
+    background: rgba(59,130,246,0.07);
+    border-color: rgba(59,130,246,0.25);
+    color: #fff;
+  }
+  .comp:hover::before { opacity: 1; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .stat {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.02em;
+    color: var(--blue);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  .ind-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .ind {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--rule);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .ind:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+  .edu-item {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .edu-deg {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--silver);
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .edu-school {
+    font-size: 0.72rem;
+    color: var(--blue);
+    margin-bottom: 1px;
+  }
+  .edu-year { font-size: 0.68rem; color: var(--muted); }
+
+  .lang-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .lang-row:last-child { border-bottom: none; }
+  .lang-name { font-size: 0.82rem; font-weight: 500; color: var(--silver); }
+  .lang-lv {
+    font-size: 0.67rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-lt);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  @media (max-width: 720px) {
+    .body { grid-template-columns: 1fr; }
+    .spine { display: none; }
+    .sidebar { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 36px; margin-top: 0; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-contact { flex-direction: row; flex-wrap: wrap; }
+    .exp { grid-template-columns: 80px 1fr; }
+  }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .mesh, body::after { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="mesh">
+  <div class="mesh-blob"></div>
+  <div class="mesh-blob"></div>
+  <div class="mesh-blob"></div>
+</div>
+<div class="page">
+  <header class="hero">
+    <div class="hero-left">
+      <div class="hero-index">
+        <span>Solutions Consultant</span>
+        <span class="sub">AI &amp; Enterprise Growth</span>
       </div>
-    </nav>
-
-    <div class="container-fluid p-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-        <div class="my-auto">
-          <h1 class="mb-0">Borja
-            <span class="text-primary">Delgado</span>
-          </h1>
-          <h3 class="mb-0">Software Engineer</h3>
-          <div class="subheading mb-5">Madrid, Spain · +34 669.20.35.60 ·
-            <a href="mailto:name@email.com">borja.delan88@gmail.com</a>
-          </div>
-          <p class="lead mb-5">I am a highly motivated and creative person, able to organize, being competent and effective under pressure. I enjoy both working in a team and independently, besides being open minded, dynamic and reliable.</p>
-          <div class="social-icons">
-            <a target="new" href="https://www.linkedin.com/in/borja-delgado-a3aa144a/">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a target="new" href="https://github.com/bdelan">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="skype:borjita_delan88?call">
-              <i class="fab fa-skype"></i>
-            </a>
-	    <a target="new" href="files\Resume Borja Delgado.pdf">
-              <i class="fas fa-file-download"></i>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
-        <div class="my-auto">
-          <h2 class="mb-5">Experience</h2>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Network and Computer Systems Administrator</h3>
-              <div class="subheading mb-3">Cervantes Institute (Chicago, IL)</div>
-              <p>• Computer technician and consultant in systems and applications.<br/>
-				• Connect local networks and computer systems to internal / external networks.<br/>
-				• Install software, modify and repair hardware and resolve technical issues with a variety of diagnostic tools.<br/>
-				• Ensure proper release and maintenance of all systems.<br/>
-				• Implemented and administered advanced Microsoft technologies.</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">March 2015 - Present</span>
-            </div>
-          </div>
-		
-	  <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Web Software Developer</h3>
-              <div class="subheading mb-3">Freelance (Chicago, IL)</div>
-              <p>• Designing and implementing website features (WordPress, HTML5, CSS3, PHP, JS, Git, jQuery, MySQL).<br/>
-				• Ensuring high-performance, managing all technical aspects of the CMS.</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">September 2018 - December 2020</span>
-            </div>
-          </div>
-		
-	  <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Business Project Manager</h3>
-              <div class="subheading mb-3">Freelance (Chicago, IL)</div>
-              <p>• Planning, coordinating and covering business / cultural events.</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">March 2016 - December 2020</span>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Software Developer</h3>
-              <div class="subheading mb-3">VerticalScope USA (Chicago, IL)</div>
-              <p>• Implement well designed code and build detailed specifications following industry best practices.<br/>
-				• Troubleshoot, test and maintain the core product software and databases to ensure strong optimization.<br/>
-				• Use SCRUM for agile development to contribute in all phases of the development lifecycle.<br/>
-				• Develop and deploy new features to facilitate related procedures and tools (PHP, jQuery, MySQL, AJAX,
-					HTML, CSS, JavaScript, React, third-party APIs: Google, Facebook, Amazon, etc.)</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">January 2016 - September 2018</span>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Network and Computer Systems Administrator</h3>
-              <div class="subheading mb-3">Consulate General of Spain (Chicago, IL)</div>
-              <p>• Install and maintain hardware, computer systems and internet services.</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">September 2015 - March 2016</span>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Associate Software Engineer</h3>
-              <div class="subheading mb-3">Accenture (Madrid, Spain)</div>
-	              <div class="subheading mb-0">• Projects: BBVA Compass Bank, Santander Bank, Carrefour Group.</div>
-	              <p>◦ Reviewed and approved all engineering, product and project scope documents prior to delivery.<br/>
-					◦ Assessed costs and risks associated with developing new features and products.<br/>
-					◦ Built databases and table structures following n-tier architecture methodology for web applications.<br/>
-					◦ Implemented process management system using IBM Mainframe (COBOL/CICS/DB2/JCL/SQL).<br/>
-					◦ Analysis and project planning for entities based in Boston, France, Turkey and Spain.</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">November 2011 - March 2015</span>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Web Developer Intern</h3>
-              <div class="subheading mb-3">ABF Interactive (Madrid, Spain)</div>
-              <p>• Computer technician and consultant in systems and applications.<br/>
-				• Connected networks and computer systems to int./ext. networks (HTML, CSS, JavaScript, MySQL, Dreamweaver).</p>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">March 2011 - June 2011</span>
-            </div>
-          </div>
-
-        </div>
-
-      </section>
-
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="education">
-        <div class="my-auto">
-          <h2 class="mb-5">Education</h2>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">Bachelor in Computer Science Engineering</h3>
-              <div class="subheading mb-3">International University of La Rioja</div>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">2020</span>
-            </div>
-          </div>
-
-          <div class="resume-item d-flex flex-column flex-md-row">
-            <div class="resume-content mr-auto">
-              <h3 class="mb-0">High-Level Associate Degree in Information Technology</h3>
-              <div class="subheading mb-3">Francisco de Quevedo Institute of Technology</div>
-            </div>
-            <div class="resume-date text-md-right">
-              <span class="text-primary">2011</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
-        <div class="my-auto">
-          <h2 class="mb-5">Skills</h2>
-
-          <div class="subheading mb-3">Programming Languages &amp; Tools</div>
-          <ul class="list-inline dev-icons">
-          	<li class="list-inline-item">
-              <i class="fab fa-java"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-php"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fas fa-database"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-html5"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-css3-alt"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-js-square"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-react"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fas fa-copyright"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-wordpress"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-blogger"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-npm"></i>
-            </li>
-          </ul>
-          <ul class="list-inline dev-icons">
-          	<li class="list-inline-item">
-              <i class="fab fa-windows"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-apple"></i>
-            </li>
-            <li class="list-inline-item">
-              <i class="fab fa-linux"></i>
-            </li>
-            <li class="list-inline-item">
-            	<i class="fab fa-android"></i>
-            </li>
-             <li class="list-inline-item">
-            	<i class="fas fa-mobile-alt"></i>
-            </li>
-          </ul>
-
-          <div class="subheading mb-3">Workflow</div>
-          <ul class="fa-ul mb-0">
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              Responsive Design</li>
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              Cross Browser Testing &amp; Debugging</li>
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              Cross Functional Teams</li>
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              Attention to detail</li>
-            <li>
-              <i class="fa-li fa fa-check"></i>
-              Agile Development &amp; Scrum</li>
-          </ul>
-        </div>
-      </section>
-
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="interests">
-        <div class="my-auto">
-          <h2 class="mb-5">Interests</h2>
-          <p>Apart from being a software developer, I love outdoor sports, running is my favorite hobby and yoga is also fun and good for both body and mind. During the warmer months I also enjoy biking and swimming.</p>
-          <p class="mb-0">When I'm indoors, I like watching sci-fi and adventure genre movies and TV shows, I always try to innovate when I'm cooking and I spend a large amount of my free time exploring the latest advances in technology.</p>
-        </div>
-      </section>
-
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="certifications">
-        <div class="my-auto">
-          <h2 class="mb-5">Certifications</h2>
-          <div class="awards">
-	          <ul class="fa-ul mb-0">
-	            <li>
-	              <i class="fas fa-award"></i>
-	              Java Developer Certification</li>
-	            <li>
-	              <i class="fas fa-award"></i>
-	              Web Designer Certification (HTML5 + CSS3)</li>
-	            <li>
-	              <i class="fas fa-award"></i>
-	              Mobile Application Developer Certification (Android / iOS)</li>
-	            <li>
-	              <i class="fas fa-award"></i>
-	              Website & Weblog Development Diploma (CMS: WordPress)</li>
-	            <li>
-	              <i class="fas fa-award"></i>
-	              Community Manager Certification</li>
-	            <li>
-	              <i class="fas fa-award"></i>
-	              IBM Mainframe Applications Certification</li>
-	            <li>
-	             <i class="fas fa-award"></i>
-	              Advanced Diploma in English for business</li>
-	          </ul>
-	      </div>
-        </div>
-      </section>
-
+      <div class="hero-name">Borja<br><em>Delgado</em></div>
+      <p class="hero-tagline">
+        Helping companies turn AI into revenue, bridging the gap between complex technology and the business outcomes that actually matter. Trusted advisor to global brands across retail, fintech, and beyond.
+      </p>
     </div>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/resume.min.js"></script>
-
-  </body>
-
-</html>
+    <div class="hero-contact">
+      <a class="hc-icon" href="/cdn-cgi/l/email-protection#f79598859d96d993929b9699cfcfb7909a969e9bd994989a" title="borja.delan88@gmail.com">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </a>
+      <a class="hc-icon" href="https://linkedin.com/in/borja-delgado" title="linkedin.com/in/borja-delgado" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+    </div>
+  </header>
+  <div class="body">
+    <div class="spine">
+      <div class="spine-dot"></div>
+      <div class="spine-label">Work Experience</div>
+    </div>
+    <main class="main">
+      <div class="section">
+        <div class="sec-head">
+          <span class="sec-num">01</span>
+          <span class="sec-title">Experience</span>
+          <div class="sec-rule"></div>
+        </div>
+        <div class="exp">
+          <div class="exp-time">
+            <span class="exp-year">Present  ·  2023</span>
+            <span class="exp-period">2 yrs · ongoing</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">Lead Solutions Consultant &amp; Technical Account Manager</div>
+            <div class="exp-co">Certainly</div>
+            <div class="exp-location">Copenhagen, Denmark · Remote</div>
+            <ul class="exp-list">
+              <li>Owned the full customer lifecycle for strategic global accounts, from pre-sales architecture through onboarding, adoption, and revenue expansion.</li>
+              <li>Primary trusted advisor to enterprise and high-growth customers; aligned AI solutions to real commercial goals, not just technical specs.</li>
+              <li>Led pre-sales strategy end-to-end: discovery, solution design, demos, and technical validation to close complex deals.</li>
+              <li>Designed and delivered conversational AI, custom integrations, and automation workflows that drove measurable improvements in revenue, efficiency, and CX.</li>
+              <li>Identified expansion opportunities across the customer base; supported renewals and upsells by surfacing new use cases.</li>
+              <li>Influenced product roadmap as the internal voice of the customer; resolved escalated technical challenges alongside Engineering.</li>
+              <li>Mentored Solutions Engineers and set team-wide standards for solution architecture and delivery.</li>
+            </ul>
+            <div class="exp-accounts">
+              <span class="acc">MrBeast Feastables (US)</span>
+              <span class="acc">Ticketmaster (US)</span>
+              <span class="acc">ThriveCart (US)</span>
+              <span class="acc">TruHeight (US)</span>
+              <span class="acc">Atlantic Pet Products (AU)</span>
+              <span class="acc">Culture Kings (AU)</span>
+              <span class="acc">Quad Lock (AU)</span>
+              <span class="acc">GANNI (DK)</span>
+              <span class="acc">MakesYouLocal (DK)</span>
+              <span class="acc">Monta (US)</span>
+              <span class="acc">Rat &amp; Boa (UK)</span>
+              <span class="acc">Fintiba (DE)</span>
+              <span class="acc">Vetsak (DE)</span>
+              <span class="acc">Banchile (CL)</span>
+              <span class="acc">YesPlay (ZA)</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp">
+          <div class="exp-time">
+            <span class="exp-year">2023  ·  2022</span>
+            <span class="exp-period">1 yr 5 mos</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">Senior Solutions Engineer</div>
+            <div class="exp-co">Certainly</div>
+            <div class="exp-location">Copenhagen, Denmark · Hybrid</div>
+            <ul class="exp-list">
+              <li>Led technical discovery sessions to define architecture, surface use cases, and design AI solutions aligned to customer business requirements.</li>
+              <li>Delivered end-to-end onboarding and implementation, ensuring fast time-to-value and strong adoption.</li>
+              <li>Built integrations with CRM platforms, e-commerce systems, APIs, and custom backends.</li>
+              <li>Supported Sales with deep technical expertise during late-stage and complex enterprise deals.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp">
+          <div class="exp-time">
+            <span class="exp-year">2022  ·  2021</span>
+            <span class="exp-period">1 year</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">Solutions Engineer</div>
+            <div class="exp-co">Certainly</div>
+            <div class="exp-location">Copenhagen, Denmark · Hybrid</div>
+            <ul class="exp-list">
+              <li>Delivered product demonstrations and technical validation during pre-sales engagements.</li>
+              <li>Implemented conversational AI solutions and guided customers through platform adoption and deployment.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp">
+          <div class="exp-time">
+            <span class="exp-year">2020  ·  2015</span>
+            <span class="exp-period">5 yrs 9 mos</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">Network &amp; Systems Administrator</div>
+            <div class="exp-co">Cervantes Institute</div>
+            <div class="exp-location">Chicago, US · Hybrid</div>
+            <ul class="exp-list">
+              <li>Managed IT infrastructure, systems, and applications across the institute, serving as the key technical point of contact for stakeholders and vendors.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp">
+          <div class="exp-time">
+            <span class="exp-year">2019  ·  2016</span>
+            <span class="exp-period">3 yrs 9 mos</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">Software Developer</div>
+            <div class="exp-co">VerticalScope</div>
+            <div class="exp-location">Chicago, US · Hybrid</div>
+            <ul class="exp-list">
+              <li>Built and maintained core product software and databases; applied Agile/SCRUM across all development lifecycle phases.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp">
+          <div class="exp-time">
+            <span class="exp-year">2015</span>
+            <span class="exp-period">10 months</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">Network &amp; Computer Systems Administrator</div>
+            <div class="exp-co">Consulate General of Spain</div>
+            <div class="exp-location">Chicago, US · On-site</div>
+            <ul class="exp-list">
+              <li>Designed, implemented, and maintained secure network infrastructure for the consulate.</li>
+              <li>Managed computer systems and implemented security measures to protect against unauthorized access.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="exp">
+          <div class="exp-time">
+            <span class="exp-year">2015  ·  2011</span>
+            <span class="exp-period">3 yrs 5 mos</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">Associate Software Engineer</div>
+            <div class="exp-co">Accenture</div>
+            <div class="exp-location">Madrid, Spain · On-site</div>
+            <ul class="exp-list">
+              <li>Delivered software solutions for a major bank's Risk department; managed client relationships with international stakeholders across Spain, the US, and France.</li>
+              <li>Implemented IBM Mainframe-based process management systems across three countries.</li>
+            </ul>
+            <div class="exp-accounts">
+              <span class="acc">BBVA Bank (ES)</span>
+              <span class="acc">Carrefour (ES)</span>
+              <span class="acc">Santander Bank (US)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="sec-head">
+          <span class="sec-num">02</span>
+          <span class="sec-title">Education</span>
+          <div class="sec-rule"></div>
+        </div>
+        <div class="exp">
+          <div class="exp-time">
+            <span class="exp-year">2020</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">BSc Computer Science Engineering</div>
+            <div class="exp-co">International University of La Rioja (UNIR)</div>
+            <div class="exp-location">La Rioja, Spain</div>
+          </div>
+        </div>
+        <div class="exp" style="margin-bottom:0;padding-bottom:0;border-bottom:none;">
+          <div class="exp-time">
+            <span class="exp-year">2011</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-role">Associate Degree in Information Technology</div>
+            <div class="exp-co">IES Francisco de Quevedo</div>
+            <div class="exp-location">Madrid, Spain</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <aside class="sidebar">
+      <div class="sb-section">
+        <div class="sb-title">At a Glance</div>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-num">5+</span>
+            <div class="stat-label">Years AI Consulting</div>
+          </div>
+          <div class="stat">
+            <span class="stat-num">4</span>
+            <div class="stat-label">Continents Served</div>
+          </div>
+          <div class="stat">
+            <span class="stat-num">15+</span>
+            <div class="stat-label">Global Accounts</div>
+          </div>
+          <div class="stat">
+            <span class="stat-num">12+</span>
+            <div class="stat-label">Years in Tech</div>
+          </div>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-title">Core Competencies</div>
+        <div class="comp-list">
+          <div class="comp">Enterprise AI Adoption</div>
+          <div class="comp">Conversational AI &amp; LLMs</div>
+          <div class="comp">Pre-Sales &amp; Deal Strategy</div>
+          <div class="comp">Full-Lifecycle TAM</div>
+          <div class="comp">Solution Architecture</div>
+          <div class="comp">API &amp; Platform Integrations</div>
+          <div class="comp">Customer Growth &amp; Expansion</div>
+          <div class="comp">Stakeholder Management</div>
+          <div class="comp">Team Mentoring &amp; Leadership</div>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-title">Industries</div>
+        <div class="ind-wrap">
+          <span class="ind">Retail &amp; E-commerce</span>
+          <span class="ind">Fintech</span>
+          <span class="ind">Entertainment</span>
+          <span class="ind">Consumer Goods</span>
+          <span class="ind">Banking</span>
+          <span class="ind">Sports &amp; Ticketing</span>
+          <span class="ind">Health &amp; Wellness</span>
+          <span class="ind">SaaS</span>
+        </div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-title">Languages</div>
+        <div class="lang-row">
+          <span class="lang-name">Spanish</span>
+          <span class="lang-lv">Native</span>
+        </div>
+        <div class="lang-row">
+          <span class="lang-name">English</span>
+          <span class="lang-lv">Full Professional</span>
+        </div>
+      </div>
+    </aside>
+  </div><!-- /b
